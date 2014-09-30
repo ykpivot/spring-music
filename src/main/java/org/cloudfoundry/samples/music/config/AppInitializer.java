@@ -20,6 +20,7 @@ public class AppInitializer implements WebApplicationInitializer {
         configureAppContextInitializers(container, SpringApplicationContextInitializer.class.getName());
         createRootAppContext(container, RepositoryConfig.class);
         createDispatcherServlet(container, WebMvcConfig.class);
+        createJolokiaServlet(container);
     }
 
     private void configureAppContextInitializers(ServletContext container, String... initClassNames) {
@@ -51,5 +52,13 @@ public class AppInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+    }
+
+    private void createJolokiaServlet(ServletContext container) {
+        ServletRegistration.Dynamic jolokia = container.addServlet("jolokia", org.jolokia.http.AgentServlet.class);
+        jolokia.setLoadOnStartup(1);
+        jolokia.addMapping("/mbeans/*");
+        jolokia.setInitParameter("mimeType", "application/json");
+        jolokia.setInitParameter("debug", "true");
     }
 }

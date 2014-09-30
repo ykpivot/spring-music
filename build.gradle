@@ -22,8 +22,8 @@ sourceSets {
     }
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+// sourceCompatibility = 1.7
+// targetCompatibility = 1.7
 
 jar {
     manifest {
@@ -40,7 +40,7 @@ buildscript {
 
     dependencies {
         classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.4'
-        classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.3'
+        classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.4'
     }
 }
 
@@ -96,6 +96,8 @@ dependencies {
     // Servlet
     compile "javax.servlet:jstl:1.2"
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+
+    compile "org.jolokia:jolokia-core:1.2.2"
 
     // Testing
     testCompile 'junit:junit:4.8.2'
